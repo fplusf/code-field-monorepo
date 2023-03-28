@@ -18,6 +18,8 @@ const UserSchema = z.object({
     .nativeEnum(DefaultPrivacyLevel)
     .optional()
     .default(DefaultPrivacyLevel.PRIVATE),
+  createdAt: z.date().optional(),
+  updatedAt: z.date().optional(),
 });
 
 export class CreateUserDto extends createZodDto(UserSchema) {}
