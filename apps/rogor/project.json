@@ -1,7 +1,7 @@
 {
-  "name": "banking",
+  "name": "rogor",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "apps/banking/src",
+  "sourceRoot": "apps/rogor/src",
   "projectType": "application",
   "targets": {
     "build": {
@@ -11,12 +11,12 @@
       "options": {
         "target": "node",
         "compiler": "tsc",
-        "outputPath": "dist/apps/banking",
-        "main": "apps/banking/src/main.ts",
-        "tsConfig": "apps/banking/tsconfig.app.json",
-        "assets": ["apps/banking/src/assets"],
+        "outputPath": "dist/apps/rogor",
+        "main": "apps/rogor/src/main.ts",
+        "tsConfig": "apps/rogor/tsconfig.app.json",
+        "assets": ["apps/rogor/src/assets"],
         "isolatedConfig": true,
-        "webpackConfig": "apps/banking/webpack.config.js"
+        "webpackConfig": "apps/rogor/webpack.config.js"
       },
       "configurations": {
         "development": {},
@@ -27,14 +27,14 @@
       "executor": "@nrwl/js:node",
       "defaultConfiguration": "development",
       "options": {
-        "buildTarget": "banking:build"
+        "buildTarget": "rogor:build"
       },
       "configurations": {
         "development": {
-          "buildTarget": "banking:build:development"
+          "buildTarget": "rogor:build:development"
         },
         "production": {
-          "buildTarget": "banking:build:production"
+          "buildTarget": "rogor:build:production"
         }
       }
     },
@@ -42,14 +42,14 @@
       "executor": "@nrwl/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["apps/banking/**/*.ts"]
+        "lintFilePatterns": ["apps/rogor/**/*.ts"]
       }
     },
     "test": {
       "executor": "@nrwl/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
-        "jestConfig": "apps/banking/jest.config.ts",
+        "jestConfig": "apps/rogor/jest.config.ts",
         "passWithNoTests": true
       },
       "configurations": {
