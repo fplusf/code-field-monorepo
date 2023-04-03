@@ -6,7 +6,7 @@ import { UpdateSpaceDto } from './dto/update-space.dto';
 import { Space } from './entities/space.entity';
 
 @Injectable()
-export class SpaceService {
+export class SpacesService {
   constructor(
     @InjectRepository(Space)
     private readonly spaceRepository: Repository<Space>

@@ -9,11 +9,11 @@ import {
 } from '@nestjs/common';
 import { CreateSpaceDto } from './dto/create-space.dto';
 import { UpdateSpaceDto } from './dto/update-space.dto';
-import { SpaceService } from './space.service';
+import { SpacesService } from './spaces.service';
 
-@Controller('space')
-export class SpaceController {
-  constructor(private readonly spaceService: SpaceService) {}
+@Controller('spaces')
+export class SpacesController {
+  constructor(private readonly spaceService: SpacesService) {}
 
   @Get()
   findAll() {
