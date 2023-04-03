@@ -12,7 +12,6 @@ const UserSchema = z.object({
   password: z.string(),
   email: z.string(),
   phoneNumber: z.string().optional(),
-  balance: z.number().optional(),
   avatar: z.string().nullable().optional(),
   defaultPrivacyLevel: z
     .nativeEnum(DefaultPrivacyLevel)

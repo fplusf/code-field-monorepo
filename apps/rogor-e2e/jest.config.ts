@@ -1,6 +1,6 @@
 /* eslint-disable */
 export default {
-  displayName: 'banking-e2e',
+  displayName: 'rogor-e2e',
   preset: '../../jest.preset.js',
   globals: {
     'ts-jest': {
@@ -15,5 +15,5 @@ export default {
     '^.+\\.[tj]s$': 'ts-jest',
   },
   moduleFileExtensions: ['ts', 'js', 'html'],
-  coverageDirectory: '../../coverage/banking-e2e',
+  coverageDirectory: '../../coverage/rogor-e2e',
 };

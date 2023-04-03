@@ -1,6 +1,6 @@
 {
   "$schema": "./node_modules/nx/schemas/nx-schema.json",
-  "npmScope": "banking-app",
+  "npmScope": "rogor",
   "tasksRunnerOptions": {
     "default": {
       "runner": "nx/tasks-runners/default",
@@ -36,5 +36,5 @@
     ],
     "sharedGlobals": []
   },
-  "defaultProject": "banking"
+  "defaultProject": "rogor"
 }

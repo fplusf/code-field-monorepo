@@ -4,6 +4,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UsersModule } from './users/users.module';
+import { SpacesModule } from './spaces/space.module';
 import { APP_PIPE } from '@nestjs/core';
 import { ZodValidationPipe } from 'nestjs-zod';
 
@@ -20,6 +21,7 @@ import { ZodValidationPipe } from 'nestjs-zod';
       synchronize: true,
     }),
     UsersModule,
+    SpacesModule,
   ],
   controllers: [AppController],
   providers: [

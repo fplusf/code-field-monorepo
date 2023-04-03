@@ -2,9 +2,12 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  JoinColumn,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import { Space } from '../../spaces/entities/space.entity';
 
 export enum DefaultPrivacyLevel {
   PUBLIC = 'PUBLIC',
@@ -20,7 +23,7 @@ export enum DefaultPrivacyLevel {
  * define the other columns in the database.
  */
 
-@Entity()
+@Entity('users')
 export class User {
   @PrimaryGeneratedColumn()
   id: number;
@@ -46,11 +49,12 @@ export class User {
   @Column({ nullable: true })
   phoneNumber: string;
 
-  @Column({ default: 0 })
-  balance: number;
-
   @Column({ nullable: true })
   avatar: string;
+
+  @JoinColumn()
+  @OneToMany(() => Space, (space) => space.userId)
+  spaces: number;
 
   @Column('enum', {
     enum: DefaultPrivacyLevel,

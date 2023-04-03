@@ -1,13 +1,13 @@
 {
-  "name": "banking-e2e",
+  "name": "rogor-e2e",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "implicitDependencies": ["banking"],
+  "implicitDependencies": ["rogor"],
   "targets": {
     "e2e": {
       "executor": "@nrwl/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{e2eProjectRoot}"],
       "options": {
-        "jestConfig": "apps/banking-e2e/jest.config.ts",
+        "jestConfig": "apps/rogor-e2e/jest.config.ts",
         "passWithNoTests": true
       }
     },
@@ -15,7 +15,7 @@
       "executor": "@nrwl/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["apps/banking-e2e/**/*.{js,ts}"]
+        "lintFilePatterns": ["apps/rogor-e2e/**/*.{js,ts}"]
       }
     }
   }
