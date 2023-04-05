@@ -13,11 +13,16 @@ export class SpacesService {
   ) {}
 
   findAll() {
-    return this.spaceRepository.find();
+    return this.spaceRepository.find({
+      relations: ['folders'],
+    });
   }
 
   async findOne(id: number) {
-    const space = await this.spaceRepository.findOne({ where: { id } });
+    const space = await this.spaceRepository.findOne({
+      where: { id },
+      relations: ['folders'],
+    });
     if (!space) {
       throw new Error('Space not found');
     }

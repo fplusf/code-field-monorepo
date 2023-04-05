@@ -5,7 +5,7 @@ import { v4 } from 'uuid';
 
 const UserSchema = z.object({
   id: z.number().optional(),
-  uuid: z.string().nullable().default(v4()),
+  uuid: z.string().optional().default(v4()),
   firstName: z.string(),
   lastName: z.string(),
   username: z.string(),

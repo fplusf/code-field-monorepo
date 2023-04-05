@@ -54,7 +54,7 @@ export class User {
 
   @JoinColumn()
   @OneToMany(() => Space, (space) => space.userId)
-  spaces: number;
+  spaces: Space[];
 
   @Column('enum', {
     enum: DefaultPrivacyLevel,

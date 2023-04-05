@@ -2,11 +2,15 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  JoinTable,
+  ManyToMany,
   ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 import { User } from '../../users/entities/user.entity';
+import { Folder } from '../../folders/entities/folder.entity';
 
 /**
  * Space Entity - This entity is used to store the space information of the user.
@@ -20,6 +24,10 @@ export class Space {
 
   @ManyToOne(() => User, (user) => user.spaces)
   userId: number;
+
+  @JoinTable()
+  @ManyToMany(() => Folder, (folder) => folder.spaceId)
+  folders: Folder[];
 
   @Column()
   spaceName: string;
