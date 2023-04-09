@@ -8,6 +8,7 @@ import { SpacesModule } from './spaces/space.module';
 import { APP_PIPE } from '@nestjs/core';
 import { ZodValidationPipe } from 'nestjs-zod';
 import { FoldersModule } from './folders/folders.module';
+import { DocumentsModule } from './document/documents.module';
 
 @Module({
   imports: [
@@ -24,6 +25,7 @@ import { FoldersModule } from './folders/folders.module';
     UsersModule,
     SpacesModule,
     FoldersModule,
+    DocumentsModule,
   ],
   controllers: [AppController],
   providers: [

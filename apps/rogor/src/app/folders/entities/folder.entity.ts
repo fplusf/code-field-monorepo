@@ -3,10 +3,12 @@ import {
   CreateDateColumn,
   Entity,
   ManyToMany,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 import { Space } from '../../spaces/entities/space.entity';
+import { Document } from '../../document/entities/document.entity';
 
 @Entity('folders')
 export class Folder {
@@ -25,9 +27,13 @@ export class Folder {
   @Column({ nullable: true })
   deepLink: string;
 
-  // TODO: figure how to set spaceId  as a foreign key while creating Folder table
-  @ManyToMany(() => Space, (space) => space.folders)
+  @ManyToMany(() => Space, (space) => space.folders, {
+    cascade: true, // add folders to space when creating a new folder
+  })
   spaceId: number;
+
+  @OneToMany(() => Document, (document) => document.folderId)
+  documents: Document[];
 
   @CreateDateColumn({
     type: 'timestamp',
