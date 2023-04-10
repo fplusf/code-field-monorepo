@@ -11,6 +11,10 @@ import {
 import { Folder } from '../../folders/entities/folder.entity';
 import { User } from '../../users/entities/user.entity';
 
+/**
+ * Space entity can be created for an existing user. It is used to group folders
+ * together.
+ */
 @Entity('spaces') // alias name for the table
 export class Space {
   @PrimaryGeneratedColumn()

@@ -1,9 +1,10 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './entities/user.entity';
+import { HttpStatusCode } from 'axios';
 
 @Injectable()
 export class UsersService {
@@ -24,7 +25,7 @@ export class UsersService {
       relations: ['spaces'],
     });
     if (!user) {
-      throw new Error('User not found');
+      throw new HttpException('User not found', HttpStatusCode.NotFound);
     }
     return user;
   }
@@ -41,7 +42,7 @@ export class UsersService {
     });
 
     if (!user) {
-      throw new Error('User not found');
+      throw new HttpException('User not found', HttpStatusCode.NotFound);
     }
 
     return this.userRepository.save(user);
