@@ -1,9 +1,10 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Document } from './entities/document.entity';
 import { CreateDocumentDto } from './dto/create-document.dto';
 import { UpdateDocumentDto } from './dto/update-document.dto';
+import { HttpStatusCode } from 'axios';
 
 @Injectable()
 export class DocumentService {
@@ -18,7 +19,7 @@ export class DocumentService {
   async findOne(id: number) {
     const folder = await this.documentRepository.findOne({ where: { id } });
     if (!folder) {
-      throw new Error('Folder not found');
+      throw new HttpException('Document not found', HttpStatusCode.NotFound);
     }
     return folder;
   }
@@ -35,7 +36,7 @@ export class DocumentService {
     });
 
     if (!folderToUpdate) {
-      throw new Error('Folder not found');
+      throw new HttpException('Document not found', HttpStatusCode.NotFound);
     }
 
     return this.documentRepository.save(folderToUpdate);

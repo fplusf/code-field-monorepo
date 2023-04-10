@@ -1,9 +1,10 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateSpaceDto } from './dto/create-space.dto';
 import { UpdateSpaceDto } from './dto/update-space.dto';
 import { Space } from './entities/space.entity';
+import { HttpStatusCode } from 'axios';
 
 @Injectable()
 export class SpacesService {
@@ -14,6 +15,7 @@ export class SpacesService {
 
   findAll() {
     return this.spaceRepository.find({
+      // include the relations here so that the folders are included in the response
       relations: ['folders'],
     });
   }
@@ -24,7 +26,7 @@ export class SpacesService {
       relations: ['folders'],
     });
     if (!space) {
-      throw new Error('Space not found');
+      throw new HttpException('Space not found', HttpStatusCode.NotFound);
     }
     return space;
   }
@@ -41,7 +43,7 @@ export class SpacesService {
     });
 
     if (!spaceToUpdate) {
-      throw new Error('Space not found');
+      throw new HttpException('Space not found', HttpStatusCode.NotFound);
     }
 
     return this.spaceRepository.save(spaceToUpdate);
