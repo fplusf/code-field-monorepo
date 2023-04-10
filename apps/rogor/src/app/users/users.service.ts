@@ -5,6 +5,7 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './entities/user.entity';
 import { HttpStatusCode } from 'axios';
+import { PaginationQueryDto } from '../../common/dto/pagination-query.dto';
 
 @Injectable()
 export class UsersService {
@@ -13,9 +14,14 @@ export class UsersService {
     private readonly userRepository: Repository<User>
   ) {}
 
-  findAll() {
+  findAll(paginationQueryDto: PaginationQueryDto) {
+    const { limit, offset } = paginationQueryDto;
+    console.log('limit', limit);
+    console.log('offset', offset);
     return this.userRepository.find({
       relations: ['spaces'],
+      take: limit,
+      skip: offset,
     });
   }
 

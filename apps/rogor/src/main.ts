@@ -18,6 +18,9 @@ async function bootstrap() {
       transform: true,
       whitelist: true,
       forbidNonWhitelisted: true,
+      transformOptions: {
+        enableImplicitConversion: true, // enable implicit conversion for DTOs with primitive types (e.g. string to number)
+      },
     })
   );
 

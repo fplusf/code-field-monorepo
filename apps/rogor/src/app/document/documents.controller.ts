@@ -6,18 +6,20 @@ import {
   Param,
   Patch,
   Post,
+  Query,
 } from '@nestjs/common';
 import { CreateDocumentDto } from './dto/create-document.dto';
 import { UpdateDocumentDto } from './dto/update-document.dto';
 import { DocumentService } from './documents.service';
+import { PaginationQueryDto } from '../../common/dto/pagination-query.dto';
 
 @Controller('documents')
 export class DocumentController {
   constructor(private readonly documentService: DocumentService) {}
 
   @Get()
-  findAll() {
-    return this.documentService.findAll();
+  findAll(@Query() paginationQuery: PaginationQueryDto) {
+    return this.documentService.findAll(paginationQuery);
   }
 
   @Get(':id')
