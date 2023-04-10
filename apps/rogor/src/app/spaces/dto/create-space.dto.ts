@@ -1,13 +1,12 @@
-import { createZodDto } from 'nestjs-zod';
-import { z } from 'nestjs-zod/z';
+import { IsNumber, IsString, IsUrl } from 'class-validator';
 
-const SpaceSchema = z.object({
-  id: z.number().optional(),
-  userId: z.number(),
-  spaceName: z.string(),
-  avatar: z.string().optional(),
-  createdAt: z.date().optional(),
-  updatedAt: z.date().optional(),
-});
+export class CreateSpaceDto {
+  @IsNumber()
+  userId: number;
 
-export class CreateSpaceDto extends createZodDto(SpaceSchema) {}
+  @IsString()
+  spaceName: string;
+
+  @IsUrl()
+  avatar?: string;
+}

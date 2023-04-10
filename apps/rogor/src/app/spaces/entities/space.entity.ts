@@ -5,17 +5,11 @@ import {
   JoinTable,
   ManyToMany,
   ManyToOne,
-  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import { User } from '../../users/entities/user.entity';
 import { Folder } from '../../folders/entities/folder.entity';
-
-/**
- * Space Entity - This entity is used to store the space information of the user.
- * This name also used in the database table name.
- */
+import { User } from '../../users/entities/user.entity';
 
 @Entity('spaces') // alias name for the table
 export class Space {

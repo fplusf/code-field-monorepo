@@ -21,8 +21,8 @@ export class SpacesController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.spaceService.findOne(+id);
+  findOne(@Param('id') id: number) {
+    return this.spaceService.findOne(id);
   }
 
   @Post()
@@ -31,12 +31,12 @@ export class SpacesController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateSpaceDto: UpdateSpaceDto) {
-    return this.spaceService.update(+id, updateSpaceDto);
+  update(@Param('id') id: number, @Body() updateSpaceDto: UpdateSpaceDto) {
+    return this.spaceService.update(id, updateSpaceDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.spaceService.remove(+id);
+  remove(@Param('id') id: number) {
+    return this.spaceService.remove(id);
   }
 }
