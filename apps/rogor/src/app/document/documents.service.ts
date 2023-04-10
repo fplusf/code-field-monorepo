@@ -5,6 +5,7 @@ import { Document } from './entities/document.entity';
 import { CreateDocumentDto } from './dto/create-document.dto';
 import { UpdateDocumentDto } from './dto/update-document.dto';
 import { HttpStatusCode } from 'axios';
+import { PaginationQueryDto } from '../../common/dto/pagination-query.dto';
 
 @Injectable()
 export class DocumentService {
@@ -12,8 +13,9 @@ export class DocumentService {
     @InjectRepository(Document) private documentRepository: Repository<Document>
   ) {}
 
-  async findAll() {
-    return this.documentRepository.find();
+  async findAll(paginationQuery: PaginationQueryDto) {
+    const { limit, offset } = paginationQuery;
+    return this.documentRepository.find({ take: limit, skip: offset });
   }
 
   async findOne(id: number) {
