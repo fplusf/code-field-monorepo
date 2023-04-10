@@ -21,8 +21,8 @@ export class FoldersController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.foldersService.findOne(+id);
+  findOne(@Param('id') id: number) {
+    return this.foldersService.findOne(id);
   }
 
   @Post()
@@ -31,12 +31,12 @@ export class FoldersController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateFolderDto: UpdateFolderDto) {
-    return this.foldersService.update(+id, updateFolderDto);
+  update(@Param('id') id: number, @Body() updateFolderDto: UpdateFolderDto) {
+    return this.foldersService.update(id, updateFolderDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.foldersService.remove(+id);
+  remove(@Param('id') id: number) {
+    return this.foldersService.remove(id);
   }
 }

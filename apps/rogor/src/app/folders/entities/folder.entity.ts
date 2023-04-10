@@ -24,6 +24,10 @@ export class Folder {
   @Column()
   color: string;
 
+  /**
+   * Deep link can be used to link to a specific folder in the app
+   * @example /folder/1 will link to the folder with id 1
+   */
   @Column({ nullable: true })
   deepLink: string;
 
