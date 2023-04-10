@@ -21,22 +21,25 @@ export class DocumentController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.documentService.findOne(+id);
+  findOne(@Param('id') id: number) {
+    return this.documentService.findOne(id);
   }
 
   @Post()
-  create(@Body() createFolderDto: CreateDocumentDto) {
-    return this.documentService.create(createFolderDto);
+  create(@Body() createDocumentDto: CreateDocumentDto) {
+    return this.documentService.create(createDocumentDto);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateFolderDto: UpdateDocumentDto) {
-    return this.documentService.update(+id, updateFolderDto);
+  update(
+    @Param('id') id: number,
+    @Body() updateDocumentDto: UpdateDocumentDto
+  ) {
+    return this.documentService.update(id, updateDocumentDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.documentService.remove(+id);
+  remove(@Param('id') id: number) {
+    return this.documentService.remove(id);
   }
 }

@@ -16,7 +16,7 @@ export class Document {
   @Column()
   title: string;
 
-  @Column({ nullable: true })
+  @Column({ nullable: true, length: 5 })
   icon: string;
 
   @Column()

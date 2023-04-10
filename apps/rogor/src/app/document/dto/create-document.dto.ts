@@ -1,15 +1,19 @@
-import { createZodDto } from 'nestjs-zod';
-import { z } from 'zod';
+import { IsNumber, IsString, MaxLength } from 'class-validator';
 
-const DocumentSchema = z.object({
-  id: z.number().optional(),
-  title: z.string().min(1).max(255),
-  icon: z.string().optional(),
-  content: z.string(),
-  folderId: z.number(),
-  shareableLink: z.string().nullable().optional(),
-  createdAt: z.date().optional(),
-  updatedAt: z.date().optional(),
-});
+export class CreateDocumentDto {
+  @IsString()
+  readonly title: string;
 
-export class CreateDocumentDto extends createZodDto(DocumentSchema) {}
+  // 5 is the max length of the emoji icon
+  @MaxLength(5, {
+    message: 'Icon must be not more than 1 character',
+  })
+  @IsString()
+  readonly icon: string;
+
+  @IsString()
+  readonly content: string;
+
+  @IsNumber()
+  readonly folderId: number;
+}
