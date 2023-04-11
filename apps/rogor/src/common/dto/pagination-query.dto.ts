@@ -1,4 +1,4 @@
-import { IsOptional, IsPositive } from 'class-validator';
+import { IsEnum, IsOptional, IsPositive } from 'class-validator';
 
 export class PaginationQueryDto {
   @IsOptional()
@@ -8,4 +8,12 @@ export class PaginationQueryDto {
   @IsOptional()
   @IsPositive()
   offset: number;
+
+  @IsOptional()
+  @IsEnum(['ASC', 'DESC'], { message: 'order must be ASC or DESC' })
+  order: string;
+
+  @IsOptional()
+  @IsEnum(['lastViewedAt', 'createdAt', 'updatedAt'])
+  sortBy: string;
 }

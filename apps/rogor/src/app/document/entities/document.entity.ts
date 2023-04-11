@@ -30,6 +30,9 @@ export class Document {
   @Column({ nullable: true })
   shareableLink: string;
 
+  @Column({ nullable: true })
+  lastViewedAt: Date;
+
   @CreateDateColumn({
     type: 'timestamp',
     default: () => 'CURRENT_TIMESTAMP(3)',
