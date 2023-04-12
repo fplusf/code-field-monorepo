@@ -2,6 +2,7 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  JoinTable,
   ManyToMany,
   OneToMany,
   PrimaryGeneratedColumn,
@@ -32,10 +33,11 @@ export class Folder {
   deepLink: string;
 
   @ManyToMany(() => Space, (space) => space.folders, {
-    cascade: true, // add folders to space when creating a new folder
+    cascade: true, // add folder to a space when creating a new folder
   })
   spaceId: number;
 
+  @JoinTable()
   @OneToMany(() => Document, (document) => document.folderId)
   documents: Document[];
 

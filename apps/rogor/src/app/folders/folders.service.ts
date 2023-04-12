@@ -1,15 +1,18 @@
 import { HttpException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Folder } from './entities/folder.entity';
-import { Repository } from 'typeorm';
+import { EntityManager, Repository } from 'typeorm';
 import { CreateFolderDto } from './dto/create-folder.dto';
 import { UpdateFolderDto } from './dto/update-folder.dto';
 import { HttpStatusCode } from 'axios';
+import { Document } from '../document/entities/document.entity';
+import { MoveDocumentToFolderParams } from './folders.controller';
 
 @Injectable()
 export class FoldersService {
   constructor(
-    @InjectRepository(Folder) private folderRepository: Repository<Folder>
+    @InjectRepository(Folder) private folderRepository: Repository<Folder>,
+    private manager: EntityManager
   ) {}
 
   async findAll() {
@@ -45,5 +48,27 @@ export class FoldersService {
   async remove(id: number) {
     const folder = await this.folderRepository.findOne({ where: { id } });
     return this.folderRepository.remove(folder);
+  }
+
+  // TODO: this is not working yet
+  async moveDocumentToFolder(
+    params: MoveDocumentToFolderParams
+  ): Promise<Document> {
+    const folder = await this.manager.findOne(Folder, {
+      where: { id: +params.folderId },
+    });
+    if (!folder) {
+      throw new HttpException('Folder not found', HttpStatusCode.NotFound);
+    }
+
+    const document = await this.manager.findOne(Document, {
+      where: { id: +params.documentId },
+    });
+    if (!document) {
+      throw new HttpException('Document not found', HttpStatusCode.NotFound);
+    }
+
+    document.folderId = +params.folderId;
+    return this.manager.save(Document, document);
   }
 }
