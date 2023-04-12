@@ -1,6 +1,6 @@
-# rogorApp
+# Note taking app with spaces, folders and documents
 
-Imaginary rogor app, where you can create an account, deposit, withdraw and transfer money.
+The user can have an account and create spaces and notes
 
 ## Getting Started
 
