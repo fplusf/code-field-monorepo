@@ -51,6 +51,7 @@ export class FoldersService {
   }
 
   // TODO: this is not working yet
+  // Use transaction to move document to folder & create event in one transaction
   async moveDocumentToFolder(
     params: MoveDocumentToFolderParams
   ): Promise<Document> {
