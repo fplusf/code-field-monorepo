@@ -10,12 +10,20 @@ import { PaginationQueryDto } from '../../common/dto/pagination-query.dto';
 @Injectable()
 export class DocumentService {
   constructor(
-    @InjectRepository(Document) private documentRepository: Repository<Document>
+    @InjectRepository(Document)
+    private documentRepository: Repository<Document>
   ) {}
 
   async findAll(paginationQuery: PaginationQueryDto) {
-    const { limit, offset } = paginationQuery;
-    return this.documentRepository.find({ take: limit, skip: offset });
+    const { limit, offset, order, sortBy } = paginationQuery;
+
+    return this.documentRepository.find({
+      take: limit,
+      skip: offset,
+      order: {
+        [sortBy]: order,
+      },
+    });
   }
 
   async findOne(id: number) {
@@ -23,6 +31,16 @@ export class DocumentService {
     if (!folder) {
       throw new HttpException('Document not found', HttpStatusCode.NotFound);
     }
+
+    // update lastViewedAt
+    const recentDocument = await this.documentRepository.findOne({
+      where: { id },
+    });
+    if (recentDocument) {
+      recentDocument.lastViewedAt = new Date();
+      await this.documentRepository.save(recentDocument);
+    }
+
     return folder;
   }
 

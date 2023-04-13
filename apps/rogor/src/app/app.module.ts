@@ -9,6 +9,7 @@ import { APP_PIPE } from '@nestjs/core';
 import { ZodValidationPipe } from 'nestjs-zod';
 import { FoldersModule } from './folders/folders.module';
 import { DocumentsModule } from './document/documents.module';
+import { EventsModule } from './events/events.module';
 
 @Module({
   imports: [
@@ -26,6 +27,7 @@ import { DocumentsModule } from './document/documents.module';
     SpacesModule,
     FoldersModule,
     DocumentsModule,
+    EventsModule,
   ],
   controllers: [AppController],
   providers: [

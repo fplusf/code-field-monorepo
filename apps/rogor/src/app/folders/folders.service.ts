@@ -1,15 +1,19 @@
 import { HttpException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Folder } from './entities/folder.entity';
-import { Repository } from 'typeorm';
+import { EntityManager, Repository } from 'typeorm';
 import { CreateFolderDto } from './dto/create-folder.dto';
 import { UpdateFolderDto } from './dto/update-folder.dto';
 import { HttpStatusCode } from 'axios';
+import { Document } from '../document/entities/document.entity';
+import { MoveDocumentToFolderParams } from './folders.controller';
+import { Events } from '../events/entities/events-entity';
 
 @Injectable()
 export class FoldersService {
   constructor(
-    @InjectRepository(Folder) private folderRepository: Repository<Folder>
+    @InjectRepository(Folder) private folderRepository: Repository<Folder>,
+    private queryRunner: EntityManager
   ) {}
 
   async findAll() {
@@ -17,7 +21,10 @@ export class FoldersService {
   }
 
   async findOne(id: number) {
-    const folder = await this.folderRepository.findOne({ where: { id } });
+    const folder = await this.folderRepository.findOne({
+      where: { id },
+      relations: ['documents'],
+    });
     if (!folder) {
       throw new HttpException('Folder not found', HttpStatusCode.NotFound);
     }
@@ -45,5 +52,46 @@ export class FoldersService {
   async remove(id: number) {
     const folder = await this.folderRepository.findOne({ where: { id } });
     return this.folderRepository.remove(folder);
+  }
+
+  async moveDocumentToFolder(params: MoveDocumentToFolderParams) {
+    return this.queryRunner
+      .transaction(async (manager) => {
+        const document = await manager.findOne(Document, {
+          where: { id: params.documentId },
+        });
+        const folder = await manager.findOne(Folder, {
+          where: { id: params.folderId },
+        });
+
+        if (!document) {
+          throw new HttpException(
+            'Document not found',
+            HttpStatusCode.NotFound
+          );
+        }
+
+        if (!folder) {
+          throw new HttpException('Folder not found', HttpStatusCode.NotFound);
+        }
+
+        const events = new Events();
+        events.name = document.title;
+        events.type = 'move';
+        events.timestamp = new Date();
+        events.payload = {
+          documentId: document.id,
+          folderId: folder.id,
+        };
+
+        document.folderId = folder.id;
+        await manager.save(document);
+        await manager.save(events);
+
+        return events;
+      })
+      .catch((error) => {
+        throw new HttpException(error.message, HttpStatusCode.BadRequest);
+      });
   }
 }
