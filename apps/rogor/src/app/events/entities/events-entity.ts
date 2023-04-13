@@ -1,5 +1,7 @@
 import { PrimaryGeneratedColumn, Column, Entity, Index } from 'typeorm';
 
+// TODO: create events for all importants actions
+
 @Index(['name', 'type'])
 @Entity()
 export class Events {

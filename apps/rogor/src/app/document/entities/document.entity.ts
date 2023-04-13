@@ -3,6 +3,7 @@ import {
   CreateDateColumn,
   Entity,
   ManyToMany,
+  ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
@@ -22,7 +23,7 @@ export class Document {
   @Column()
   content: string;
 
-  @ManyToMany(() => Folder, (space) => space.documents, {
+  @ManyToOne(() => Folder, (space) => space.documents, {
     cascade: true, // asotiate document to a folder when creating a new document
   })
   folderId: number;

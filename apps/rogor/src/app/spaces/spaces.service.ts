@@ -14,15 +14,13 @@ export class SpacesService {
   ) {}
 
   findAll() {
-    return this.spaceRepository.find({
-      // include the relations here so that the folders are included in the response
-      relations: ['folders'],
-    });
+    return this.spaceRepository.find();
   }
 
   async findOne(id: number) {
     const space = await this.spaceRepository.findOne({
       where: { id },
+      // include the relations here so that the folders are included in the response
       relations: ['folders'],
     });
     if (!space) {

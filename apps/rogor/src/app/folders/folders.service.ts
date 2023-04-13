@@ -7,12 +7,13 @@ import { UpdateFolderDto } from './dto/update-folder.dto';
 import { HttpStatusCode } from 'axios';
 import { Document } from '../document/entities/document.entity';
 import { MoveDocumentToFolderParams } from './folders.controller';
+import { Events } from '../events/entities/events-entity';
 
 @Injectable()
 export class FoldersService {
   constructor(
     @InjectRepository(Folder) private folderRepository: Repository<Folder>,
-    private manager: EntityManager
+    private queryRunner: EntityManager
   ) {}
 
   async findAll() {
@@ -20,7 +21,10 @@ export class FoldersService {
   }
 
   async findOne(id: number) {
-    const folder = await this.folderRepository.findOne({ where: { id } });
+    const folder = await this.folderRepository.findOne({
+      where: { id },
+      relations: ['documents'],
+    });
     if (!folder) {
       throw new HttpException('Folder not found', HttpStatusCode.NotFound);
     }
@@ -50,26 +54,44 @@ export class FoldersService {
     return this.folderRepository.remove(folder);
   }
 
-  // TODO: this is not working yet
-  // Use transaction to move document to folder & create event in one transaction
-  async moveDocumentToFolder(
-    params: MoveDocumentToFolderParams
-  ): Promise<Document> {
-    const folder = await this.manager.findOne(Folder, {
-      where: { id: +params.folderId },
-    });
-    if (!folder) {
-      throw new HttpException('Folder not found', HttpStatusCode.NotFound);
-    }
+  async moveDocumentToFolder(params: MoveDocumentToFolderParams) {
+    return this.queryRunner
+      .transaction(async (manager) => {
+        const document = await manager.findOne(Document, {
+          where: { id: params.documentId },
+        });
+        const folder = await manager.findOne(Folder, {
+          where: { id: params.folderId },
+        });
 
-    const document = await this.manager.findOne(Document, {
-      where: { id: +params.documentId },
-    });
-    if (!document) {
-      throw new HttpException('Document not found', HttpStatusCode.NotFound);
-    }
+        if (!document) {
+          throw new HttpException(
+            'Document not found',
+            HttpStatusCode.NotFound
+          );
+        }
 
-    document.folderId = +params.folderId;
-    return this.manager.save(Document, document);
+        if (!folder) {
+          throw new HttpException('Folder not found', HttpStatusCode.NotFound);
+        }
+
+        const events = new Events();
+        events.name = document.title;
+        events.type = 'move';
+        events.timestamp = new Date();
+        events.payload = {
+          documentId: document.id,
+          folderId: folder.id,
+        };
+
+        document.folderId = folder.id;
+        await manager.save(document);
+        await manager.save(events);
+
+        return events;
+      })
+      .catch((error) => {
+        throw new HttpException(error.message, HttpStatusCode.BadRequest);
+      });
   }
 }
