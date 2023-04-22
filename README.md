@@ -2,6 +2,10 @@
 
 The user can have an account and create spaces and notes
 
+## For Angular project strucutre have a look at this link:
+
+https://github.com/trungk18/angular-spotify
+
 ## Getting Started
 
 run `yarn` to install all the dependencies.
