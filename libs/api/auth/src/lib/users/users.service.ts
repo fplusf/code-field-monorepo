@@ -5,7 +5,7 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './entities/user.entity';
 import { HttpStatusCode } from 'axios';
-import { PaginationQueryDto } from '../../common/dto/pagination-query.dto';
+import { PaginationQueryDto } from '../../../../common/dto/pagination-query.dto';
 
 @Injectable()
 export class UsersService {
@@ -19,7 +19,7 @@ export class UsersService {
     console.log('limit', limit);
     console.log('offset', offset);
     return this.userRepository.find({
-      relations: ['spaces'],
+      // relations: ['spaces'],
       take: limit,
       skip: offset,
     });
@@ -28,7 +28,7 @@ export class UsersService {
   async findOne(id: number) {
     const user = await this.userRepository.findOne({
       where: { id },
-      relations: ['spaces'],
+      // relations: ['spaces'],
     });
     if (!user) {
       throw new HttpException('User not found', HttpStatusCode.NotFound);

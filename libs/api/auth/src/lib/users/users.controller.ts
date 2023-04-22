@@ -8,17 +8,23 @@ import {
   Post,
   Query,
 } from '@nestjs/common';
-import { PaginationQueryDto } from '../../common/dto/pagination-query.dto';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { UsersService } from './users.service';
+import { PaginationQueryDto } from '../../../../common/dto/pagination-query.dto';
+import { ActiveUser } from '../iam/authentication/decorators/active-user.decorator';
+import { ActiveUserData } from '../iam/interfaces/active-user.interface';
 
 @Controller('users')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
   @Get()
-  findAll(@Query() paginationQueryDto: PaginationQueryDto) {
+  findAll(
+    @ActiveUser() user: ActiveUserData,
+    @Query() paginationQueryDto: PaginationQueryDto
+  ) {
+    console.log('user: ', user);
     return this.usersService.findAll(paginationQueryDto);
   }
 

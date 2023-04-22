@@ -7,7 +7,6 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import { Space } from '../../spaces/entities/space.entity';
 
 export enum DefaultPrivacyLevel {
   PUBLIC = 'PUBLIC',
@@ -46,9 +45,9 @@ export class User {
   @Column({ nullable: true })
   avatar: string;
 
-  @JoinColumn()
-  @OneToMany(() => Space, (space) => space.userId)
-  spaces: Space[];
+  // @JoinColumn()
+  // @OneToMany(() => Space, (space) => space.userId)
+  // spaces: Space[];
 
   @Column('enum', {
     enum: DefaultPrivacyLevel,
