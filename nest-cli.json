@@ -8,6 +8,15 @@
       "compilerOptions": {
         "tsConfigPath": "libs/api/auth/tsconfig.lib.json"
       }
+    },
+    "redis": {
+      "type": "library",
+      "root": "libs/libs/api/redis",
+      "entryFile": "index",
+      "sourceRoot": "libs/libs/api/redis/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/libs/api/redis/tsconfig.lib.json"
+      }
     }
   },
   "compilerOptions": {
