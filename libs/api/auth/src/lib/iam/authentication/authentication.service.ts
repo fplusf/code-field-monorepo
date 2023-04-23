@@ -79,6 +79,7 @@ export class AuthenticationService {
       this.signToken(user.id, this.jwtConfiguration.accessExpiresIn, {
         email: user.email,
         username: user.username,
+        roles: user.roles,
       }),
       this.signToken(user.id, this.jwtConfiguration.refreshExpiresIn, {
         refreshTokenId,

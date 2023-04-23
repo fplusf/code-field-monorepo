@@ -2,11 +2,10 @@ import {
   Column,
   CreateDateColumn,
   Entity,
-  JoinColumn,
-  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import { RoleEnum, RoleType } from '../enums/roles';
 
 export enum DefaultPrivacyLevel {
   PUBLIC = 'PUBLIC',
@@ -44,6 +43,9 @@ export class User {
 
   @Column({ nullable: true })
   avatar: string;
+
+  @Column({ default: RoleEnum.Regular, type: 'enum', enum: RoleEnum })
+  roles: RoleType[];
 
   // @JoinColumn()
   // @OneToMany(() => Space, (space) => space.userId)

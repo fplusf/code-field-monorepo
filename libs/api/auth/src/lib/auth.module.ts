@@ -15,6 +15,7 @@ import { APP_GUARD } from '@nestjs/core';
 import { AuthenticationGuard } from './iam/authentication/guards/authentication.guard';
 import { RefreshTokenIdsStorage } from './iam/authentication/refresh-token-ids.storage';
 import { RedisModule } from '@rogor/api/redis';
+import { RolesGuard } from './iam/authorization/guards/roles.guard';
 
 @Module({
   imports: [
@@ -32,6 +33,10 @@ import { RedisModule } from '@rogor/api/redis';
     {
       provide: APP_GUARD,
       useClass: AuthenticationGuard,
+    },
+    {
+      provide: APP_GUARD,
+      useClass: RolesGuard,
     },
     RefreshTokenIdsStorage,
     AccessTokenGuard,
