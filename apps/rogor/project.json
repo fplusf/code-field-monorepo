@@ -38,6 +38,15 @@
         }
       }
     },
+    "repl": {
+      "executor": "@nrwl/js:node",
+      "options": {
+        "buildTarget": "rogor:build",
+        "buildTargetOptions": {
+          "main": "apps/rogor/src/repl.ts"
+        }
+      }
+    },
     "lint": {
       "executor": "@nrwl/linter:eslint",
       "outputs": ["{options.outputFile}"],
@@ -60,5 +69,5 @@
       }
     }
   },
-  "tags": []
+  "tags": ["type:app", "scope:rogor"]
 }

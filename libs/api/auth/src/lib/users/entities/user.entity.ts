@@ -2,12 +2,10 @@ import {
   Column,
   CreateDateColumn,
   Entity,
-  JoinColumn,
-  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import { Space } from '../../spaces/entities/space.entity';
+import { RoleEnum, RoleType } from '../enums/roles';
 
 export enum DefaultPrivacyLevel {
   PUBLIC = 'PUBLIC',
@@ -34,11 +32,14 @@ export class User {
   @Column()
   username: string;
 
-  @Column()
+  @Column({ nullable: true })
   password: string;
 
   @Column()
   email: string;
+
+  @Column({ nullable: true })
+  googleId: string;
 
   @Column({ nullable: true })
   phoneNumber: string;
@@ -46,9 +47,12 @@ export class User {
   @Column({ nullable: true })
   avatar: string;
 
-  @JoinColumn()
-  @OneToMany(() => Space, (space) => space.userId)
-  spaces: Space[];
+  @Column({ default: RoleEnum.Regular, type: 'enum', enum: RoleEnum })
+  roles: RoleType[];
+
+  // @JoinColumn()
+  // @OneToMany(() => Space, (space) => space.userId)
+  // spaces: Space[];
 
   @Column('enum', {
     enum: DefaultPrivacyLevel,

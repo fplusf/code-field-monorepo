@@ -14,7 +14,11 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@rogor/api/auth": ["libs/api/auth/src/index.ts"],
+      "@rogor/api/common": ["libs/api/common/src/index.ts"],
+      "@rogor/api/redis": ["libs/api/redis/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }

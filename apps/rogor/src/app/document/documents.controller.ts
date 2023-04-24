@@ -11,7 +11,7 @@ import {
 import { CreateDocumentDto } from './dto/create-document.dto';
 import { UpdateDocumentDto } from './dto/update-document.dto';
 import { DocumentService } from './documents.service';
-import { PaginationQueryDto } from '../../common/dto/pagination-query.dto';
+import { PaginationQueryDto } from '../../../../../libs/api/common/dto/pagination-query.dto';
 
 @Controller('documents')
 export class DocumentController {

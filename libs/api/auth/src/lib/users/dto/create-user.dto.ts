@@ -1,5 +1,6 @@
 import { IsEnum, IsPhoneNumber, IsString, IsUrl } from 'class-validator';
 import { DefaultPrivacyLevel } from '../entities/user.entity';
+import { RoleEnum, RoleType } from '../enums/roles';
 
 export class CreateUserDto {
   @IsString()
@@ -22,6 +23,9 @@ export class CreateUserDto {
 
   @IsUrl()
   avatar: string;
+
+  @IsEnum(RoleEnum)
+  roles: RoleType[];
 
   @IsEnum(DefaultPrivacyLevel)
   defaultPrivacyLevel: DefaultPrivacyLevel;

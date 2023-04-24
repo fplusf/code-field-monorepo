@@ -9,7 +9,6 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 import { Folder } from '../../folders/entities/folder.entity';
-import { User } from '../../users/entities/user.entity';
 
 /**
  * Space entity can be created for an existing user. It is used to group folders
@@ -20,8 +19,8 @@ export class Space {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @ManyToOne(() => User, (user) => user.spaces)
-  userId: number;
+  // @ManyToOne(() => User, (user) => user.spaces)
+  // userId: number;
 
   @JoinTable()
   @ManyToMany(() => Folder, (folder) => folder.spaceId)
