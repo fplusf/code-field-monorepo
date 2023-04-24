@@ -32,11 +32,14 @@ export class User {
   @Column()
   username: string;
 
-  @Column()
+  @Column({ nullable: true })
   password: string;
 
   @Column()
   email: string;
+
+  @Column({ nullable: true })
+  googleId: string;
 
   @Column({ nullable: true })
   phoneNumber: string;
