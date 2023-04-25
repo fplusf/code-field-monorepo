@@ -2,10 +2,13 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  JoinColumn,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 import { RoleEnum, RoleType } from '../enums/roles';
+import { Space } from '@rogor/api/spaces';
 
 export enum DefaultPrivacyLevel {
   PUBLIC = 'PUBLIC',
@@ -50,9 +53,9 @@ export class User {
   @Column({ default: RoleEnum.Regular, type: 'enum', enum: RoleEnum })
   roles: RoleType[];
 
-  // @JoinColumn()
-  // @OneToMany(() => Space, (space) => space.userId)
-  // spaces: Space[];
+  @JoinColumn()
+  @OneToMany(() => Space, (space) => space.userId)
+  spaces: Space[];
 
   @Column('enum', {
     enum: DefaultPrivacyLevel,

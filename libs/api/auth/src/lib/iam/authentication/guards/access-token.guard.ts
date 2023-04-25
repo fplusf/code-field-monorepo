@@ -23,7 +23,7 @@ export class AccessTokenGuard implements CanActivate {
     const request = context.switchToHttp().getRequest<Request>();
     const token = this.extractTokenFromHeader(request);
     if (!token) {
-      // TODO: Make this error to be returnen in the response
+      // TODO: Make this error to be returnen in the response not Internal Server Error
       throw new UnauthorizedException('No token provided');
     }
     try {

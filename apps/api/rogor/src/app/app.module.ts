@@ -1,25 +1,18 @@
 import { Module } from '@nestjs/common';
-
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { SpacesModule } from './spaces/space.module';
-import { APP_PIPE } from '@nestjs/core';
-import { ZodValidationPipe } from 'nestjs-zod';
-import { FoldersModule } from './folders/folders.module';
-import { DocumentsModule } from './document/documents.module';
-import { EventsModule } from './events/events.module';
 import { AuthModule } from '@rogor/api/auth';
+import { DocumentsModule } from '@rogor/api/documents';
+import { SpacesModule } from '@rogor/api/spaces';
+import { FoldersModule } from '@rogor/api/folders';
+import { EventsModule } from '@rogor/api/events';
+import { config } from 'process';
 
 @Module({
   imports: [
     TypeOrmModule.forRoot({
-      type: 'postgres',
-      host: 'localhost',
-      port: 5432,
-      username: 'postgres',
-      password: '1234',
-      database: 'postgres',
+      ...config,
       autoLoadEntities: true,
       synchronize: true,
     }),
@@ -30,12 +23,6 @@ import { AuthModule } from '@rogor/api/auth';
     EventsModule,
   ],
   controllers: [AppController],
-  providers: [
-    AppService,
-    {
-      provide: APP_PIPE,
-      useClass: ZodValidationPipe,
-    },
-  ],
+  providers: [AppService],
 })
 export class AppModule {}
