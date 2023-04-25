@@ -1,0 +1,73 @@
+{
+  "name": "rogor",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/api/rogor/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/webpack:webpack",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "target": "node",
+        "compiler": "tsc",
+        "outputPath": "dist/apps/api/rogor",
+        "main": "apps/api/rogor/src/main.ts",
+        "tsConfig": "apps/api/rogor/tsconfig.app.json",
+        "assets": ["apps/api/rogor/src/assets"],
+        "isolatedConfig": true,
+        "webpackConfig": "apps/api/rogor/webpack.config.js"
+      },
+      "configurations": {
+        "development": {},
+        "production": {}
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/js:node",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "rogor:build"
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "rogor:build:development"
+        },
+        "production": {
+          "buildTarget": "rogor:build:production"
+        }
+      }
+    },
+    "repl": {
+      "executor": "@nrwl/js:node",
+      "options": {
+        "buildTarget": "rogor:build",
+        "buildTargetOptions": {
+          "main": "apps/api/rogor/src/repl.ts"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/api/rogor/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "apps/api/rogor/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "configurations": {
+        "ci": {
+          "ci": true,
+          "codeCoverage": true
+        }
+      }
+    }
+  },
+  "tags": ["type:app", "scope:rogor"]
+}

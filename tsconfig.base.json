@@ -17,7 +17,11 @@
     "paths": {
       "@rogor/api/auth": ["libs/api/auth/src/index.ts"],
       "@rogor/api/common": ["libs/api/common/src/index.ts"],
-      "@rogor/api/redis": ["libs/api/redis/src/index.ts"]
+      "@rogor/api/documents": ["libs/api/documents/src/index.ts"],
+      "@rogor/api/events": ["libs/api/events/src/index.ts"],
+      "@rogor/api/folders": ["libs/api/folders/src/index.ts"],
+      "@rogor/api/redis": ["libs/api/redis/src/index.ts"],
+      "@rogor/api/spaces": ["libs/api/spaces/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

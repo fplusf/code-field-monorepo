@@ -5,7 +5,7 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './entities/user.entity';
 import { HttpStatusCode } from 'axios';
-import { PaginationQueryDto } from '../../../../common/dto/pagination-query.dto';
+import { PaginationQueryDto } from '@rogor/api/common';
 
 @Injectable()
 export class UsersService {

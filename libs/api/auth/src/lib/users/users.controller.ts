@@ -11,11 +11,11 @@ import {
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { UsersService } from './users.service';
-import { PaginationQueryDto } from '../../../../common/dto/pagination-query.dto';
 import { ActiveUser } from '../iam/authentication/decorators/active-user.decorator';
 import { ActiveUserData } from '../iam/interfaces/active-user.interface';
 import { Roles } from '../iam/authorization/decorators/roles.decorator';
 import { RoleEnum } from './enums/roles';
+import { PaginationQueryDto } from '@rogor/api/common';
 
 @Controller('users')
 export class UsersController {
