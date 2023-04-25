@@ -1,6 +1,6 @@
 {
   "name": "rogor-e2e",
-  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "implicitDependencies": ["rogor"],
   "targets": {
     "e2e": {

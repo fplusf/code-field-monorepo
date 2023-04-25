@@ -5,7 +5,7 @@ import { Document } from './entities/document.entity';
 import { CreateDocumentDto } from './dto/create-document.dto';
 import { UpdateDocumentDto } from './dto/update-document.dto';
 import { HttpStatusCode } from 'axios';
-import { PaginationQueryDto } from '../../../../../libs/api/common/dto/pagination-query.dto';
+import { PaginationQueryDto } from '../../../../../../libs/api/common/dto/pagination-query.dto';
 
 @Injectable()
 export class DocumentService {
