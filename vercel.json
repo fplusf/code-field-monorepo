@@ -3,7 +3,7 @@
   "outputDirectory": "dist/apps/api/rogor",
   "builds": [
     {
-      "src": "src/main.ts",
+      "src": "apps/api/rogor/src/main.ts",
       "use": "@vercel/node"
     }
   ],
