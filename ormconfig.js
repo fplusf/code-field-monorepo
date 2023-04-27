@@ -5,8 +5,8 @@ module.exports = {
   username: 'postgres',
   password: 'postgres',
   database: 'postgres',
-  entities: ['dist/**/*.entity.js'],
-  migrations: ['dist/migrations/*.js'],
+  entities: ['public/**/*.entity.js'],
+  migrations: ['public/migrations/*.js'],
   cli: {
     migrationsDir: 'src/migrations',
   },
