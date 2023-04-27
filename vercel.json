@@ -1,0 +1,17 @@
+{
+  "buildCommand": "nx run rogor:build:production",
+  "outputDirectory": "dist/apps/api/rogor",
+  "builds": [
+    {
+      "src": "src/main.ts",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "apps/api/rogor/src/main.ts",
+      "methods": ["GET", "POST", "PUT", "PATCH", "DELETE", "HEAD", "OPTIONS"]
+    }
+  ]
+}
