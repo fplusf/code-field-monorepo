@@ -11,7 +11,7 @@
       "options": {
         "target": "node",
         "compiler": "tsc",
-        "outputPath": "public/apps/api/rogor",
+        "outputPath": "dist/apps/api/rogor",
         "main": "apps/api/rogor/src/main.ts",
         "tsConfig": "apps/api/rogor/tsconfig.app.json",
         "assets": ["apps/api/rogor/src/assets"],
