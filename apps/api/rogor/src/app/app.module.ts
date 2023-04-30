@@ -7,15 +7,12 @@ import { DocumentsModule } from '@rogor/api/documents';
 import { SpacesModule } from '@rogor/api/spaces';
 import { FoldersModule } from '@rogor/api/folders';
 import { EventsModule } from '@rogor/api/events';
-import { config } from 'process';
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const config = require('../ormconfig');
 
 @Module({
   imports: [
-    TypeOrmModule.forRoot({
-      ...config,
-      autoLoadEntities: true,
-      synchronize: true,
-    }),
+    TypeOrmModule.forRoot(config),
     AuthModule,
     SpacesModule,
     FoldersModule,
