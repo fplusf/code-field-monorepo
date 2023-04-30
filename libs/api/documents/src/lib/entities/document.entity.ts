@@ -1,3 +1,4 @@
+/* eslint-disable @nrwl/nx/enforce-module-boundaries */
 import { Folder } from '@rogor/api/folders';
 import {
   Column,

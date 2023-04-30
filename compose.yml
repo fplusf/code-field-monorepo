@@ -3,9 +3,9 @@ services:
     image: postgres
     restart: always
     ports:
-      - '5432:5432'
+      - 5432:5432
     environment:
-      POSTGRES_PASSWORD: 1234
+      POSTGRES_PASSWORD: '1234'
       POSTGRES_USER: postgres
       POSTGRES_DB: postgres
 
@@ -14,3 +14,29 @@ services:
     restart: always
     ports:
       - '6379:6379'
+  api:
+    image: api
+    container_name: api
+    build:
+      context: .
+      dockerfile: dockerfile
+    ports:
+      - 3333:3333
+    environment:
+      # jwt
+      JWT_SECRET: ${JWT_SECRET}
+      JWT_AUDIENCE: ${JWT_AUDIENCE}
+      JWT_ISSUER: ${JWT_ISSUER}
+      JWT_EXPIRES_IN: ${JWT_EXPIRES_IN}
+      JWT_REFRESH_EXPIRES_IN: ${JWT_REFRESH_EXPIRES_IN}
+      REDIS_HOST: ${REDIS_HOST}
+      # 2 factor auth
+      TWO_FACTOR_AUTH: ${TWO_FACTOR_AUTH}
+      # Google
+      GOOGLE_CLIENT_ID: ${GOOGLE_CLIENT_ID}
+      GOOGLE_CLIENT_SECRET: ${GOOGLE_CLIENT_SECRET}
+      # DB
+      DB_HOST: ${DB_HOST}
+      DB_USERNAME: ${DB_USERNAME}
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_DATABASE: ${DB_DATABASE}
