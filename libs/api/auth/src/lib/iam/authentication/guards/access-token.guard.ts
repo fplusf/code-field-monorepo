@@ -23,7 +23,6 @@ export class AccessTokenGuard implements CanActivate {
     const request = context.switchToHttp().getRequest<Request>();
     const token = this.extractTokenFromHeader(request);
     if (!token) {
-      // TODO: Make this error to be returnen in the response not Internal Server Error
       throw new UnauthorizedException('No token provided');
     }
     try {
@@ -32,8 +31,8 @@ export class AccessTokenGuard implements CanActivate {
         this.jwtConfiguration
       );
       request[REQUEST_USER_KEY] = payload;
-    } catch (error) {
-      throw new UnauthorizedException(error);
+    } catch {
+      throw new UnauthorizedException();
     }
     return true;
   }
