@@ -7,7 +7,6 @@ tmp
 
 # dependencies
 node_modules
-.env
 
 # IDEs and editors
 /.idea
@@ -39,3 +38,6 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+
+# Env
+*.env

@@ -25,28 +25,24 @@ export class AuthenticationGuard {
     private readonly accessTokenGuard: AccessTokenGuard
   ) {}
 
-  canActivate(context: ExecutionContext) {
+  async canActivate(context: ExecutionContext) {
     const authTypes = this.reflector.getAllAndOverride<AuthType[]>(
       AUTH_TYPE_KEY,
       [context.getHandler(), context.getClass()]
     ) ?? [AuthenticationGuard.defaultAuthType];
 
-    const guards = authTypes.flatMap(
-      (authType) => this.authTypeGuardMap[authType]
-    );
-    let error = new UnauthorizedException();
+    const guards = authTypes.map((type) => this.authTypeGuardMap[type]).flat();
+    const error = new UnauthorizedException();
 
-    return guards.every(async (guard) => {
+    for (const guard of guards) {
       const canActivate = await Promise.resolve(
         guard.canActivate(context)
-      ).catch((err) => {
-        error = err;
-      });
-
-      if (!canActivate) {
-        throw error;
+      ).catch((e) => e);
+      if (canActivate === true) {
+        return true;
       }
-      return canActivate;
-    });
+    }
+
+    throw error;
   }
 }

@@ -5,7 +5,10 @@ import { REDIS_OPTIONS } from './config/redis.config';
 @Module({
   providers: [
     RedisService,
-    { provide: REDIS_OPTIONS, useValue: { host: 'localhost', port: 6379 } },
+    {
+      provide: REDIS_OPTIONS,
+      useValue: { host: process.env.REDIS_HOST, port: 6379 },
+    },
   ],
   exports: [RedisService],
 })
