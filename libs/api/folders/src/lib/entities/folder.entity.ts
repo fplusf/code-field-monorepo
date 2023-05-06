@@ -1,4 +1,4 @@
-/* eslint-disable @nrwl/nx/enforce-module-boundaries */
+/* eslint-disable @nx/enforce-module-boundaries */
 import { Document } from '@rogor/api/documents';
 import { Space } from '@rogor/api/spaces';
 import {

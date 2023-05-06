@@ -1,4 +1,4 @@
-/* eslint-disable @nrwl/nx/enforce-module-boundaries */
+/* eslint-disable @nx/enforce-module-boundaries */
 import { User } from '@rogor/api/auth';
 import { Folder } from '@rogor/api/folders';
 import {
