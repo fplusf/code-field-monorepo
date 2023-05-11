@@ -13,6 +13,7 @@
   "dependencies": {
     "@emotion/react": "^11.10.8",
     "@emotion/styled": "^11.10.8",
+    "@hookform/resolvers": "^3.1.0",
     "@mui/material": "^5.12.3",
     "@nestjs/common": "^9.0.0",
     "@nestjs/config": "^2.3.1",
@@ -39,6 +40,7 @@
     "pg": "^8.10.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-hook-form": "^7.43.9",
     "react-is": "18.2.0",
     "react-router-dom": "^5.3.4",
     "reflect-metadata": "^0.1.13",

@@ -52,13 +52,14 @@ const AuthPage: React.FC = () => {
     <AuthPageContainer>
       <AuthPageContent>
         <Switch>
+          <Redirect exact from="/" to="/login" />
           <Route path="/login">
             <Login />
           </Route>
           <Route path="/signup">
             <Signup />
           </Route>
-          <Route path="/dashboard">{testContent()}</Route>
+          {isLoggedIn && <Route path="/dashboard">{testContent()}</Route>}
         </Switch>
       </AuthPageContent>
     </AuthPageContainer>

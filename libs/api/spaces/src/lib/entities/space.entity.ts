@@ -12,6 +12,7 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 
+// TODO: try out abstract class for to enforce-module-boundaries
 /**
  * Space entity can be created for an existing user. It is used to group folders
  * together.

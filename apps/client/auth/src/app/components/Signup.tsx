@@ -1,46 +1,31 @@
 import React from 'react';
-import { TextField, Button, Stack } from '@mui/material';
+import {
+  TextField,
+  Button,
+  Stack,
+  Checkbox,
+  Alert,
+  FormControlLabel,
+} from '@mui/material';
 // import authStore from '../store';
 // import { useStore } from '@ngneat/elf';
-import { Link, Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { SignUpFormType, signUpformSchema } from '../models/sign-up.model';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
 
 const Signup: React.FC = () => {
-  const [username, setUsername] = React.useState('');
-  const [password, setPassword] = React.useState('');
-  const [confirmPassword, setConfirmPassword] = React.useState('');
-  const [error, setError] = React.useState('');
-  let isLoggedIn = false; // useStore(authStore, (state) => state.isLoggedIn);
-  const handleUsernameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setUsername(event.target.value);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm<SignUpFormType>({
+    resolver: zodResolver(signUpformSchema),
+  });
+
+  const onSubmit: SubmitHandler<SignUpFormType> = (data) => {
+    console.log(data);
   };
-
-  const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setPassword(event.target.value);
-  };
-
-  const handleConfirmPasswordChange = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    setConfirmPassword(event.target.value);
-  };
-
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-
-    if (password !== confirmPassword) {
-      setError('Passwords do not match');
-      return;
-    }
-
-    // You can replace this with your own signup logic
-    // authStore.setState({ isLoggedIn: true, username });
-    isLoggedIn = true;
-  };
-
-  if (isLoggedIn) {
-    // Redirect to main page if user is logged in
-    return <Redirect to="/dashboard" />;
-  }
 
   return (
     <Stack
@@ -49,35 +34,58 @@ const Signup: React.FC = () => {
         width: '23rem',
       }}
       spacing={2}
-      onSubmit={handleSubmit}
+      onSubmit={handleSubmit(onSubmit)}
       noValidate
       autoCapitalize="none"
       autoComplete="off"
     >
-      <TextField
-        id="username"
-        label="Username"
-        value={username}
-        onChange={handleUsernameChange}
-      />
+      <TextField id="username" label="Username" {...register('username')} />
+      <TextField id="email" label="email" type="email" {...register('email')} />
       <TextField
         id="password"
         label="Password"
         type="password"
-        value={password}
-        onChange={handlePasswordChange}
+        {...register('password')}
       />
       <TextField
         id="confirmPassword"
         label="Confirm Password"
         type="password"
-        value={confirmPassword}
-        onChange={handleConfirmPasswordChange}
+        {...register('confirmPassword')}
       />
-      {error && <p>{error}</p>}
-      <Button type="submit" variant="contained" color="primary">
+      <FormControlLabel
+        control={
+          <Checkbox
+            id="terms"
+            aria-describedby="terms"
+            {...register('terms')}
+          />
+        }
+        label={
+          <Link target="_blanket" to="/terms">
+            I accept the Terms and Conditions
+          </Link>
+        }
+      />
+      <Button
+        disabled={isSubmitting}
+        type="submit"
+        variant="contained"
+        color="primary"
+      >
         Signup
       </Button>
+      <div style={{ height: '3rem' }}>
+        {!!Object.keys(errors).length && (
+          <Alert severity="error">
+            {errors.username?.message ||
+              errors.email?.message ||
+              errors.password?.message ||
+              errors.confirmPassword?.message ||
+              errors.terms?.message}
+          </Alert>
+        )}
+      </div>
 
       <p>Already have an account?</p>
       <Button component={Link} to="/login" color="inherit">

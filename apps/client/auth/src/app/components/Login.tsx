@@ -1,42 +1,22 @@
+import { Alert, Button, Stack, TextField } from '@mui/material';
 import React from 'react';
-import { TextField, Button, css, Stack } from '@mui/material';
 // import { useStore } from '@ngneat/elf';
-import { Link, Redirect } from 'react-router-dom';
-import styled from '@emotion/styled';
-
-const styles = css`
-  .TextField {
-    color: red;
-    width: 300px;
-    background-color: pink;
-  }
-  .MuiInputBase-input {
-    background-color: lightgray;
-    color: black;
-  }
-`;
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
+import { Link } from 'react-router-dom';
+import { SignInFormType, signInFormSchema } from '../models/sign-in.model';
 
 const Login: React.FC = () => {
-  const [username, setUsername] = React.useState('');
-  const [password, setPassword] = React.useState('');
-  // let isLoggedIn = false;
-  // useStore(authStore, (state) => state.isLoggedIn);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm<SignInFormType>({
+    resolver: zodResolver(signInFormSchema),
+  });
 
-  const handleUsernameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setUsername(event.target.value);
-  };
-
-  const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setPassword(event.target.value);
-  };
-
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    // authStore.setState({ isLoggedIn: true, username });
-    // isLoggedIn = true;
-    console.log('login', { username, password });
-    // navgate to dashboard page
-    return <Redirect to="/dashboard" />;
+  const onSubmit = (data: SignInFormType) => {
+    console.log('data', data);
   };
 
   return (
@@ -46,18 +26,17 @@ const Login: React.FC = () => {
         width: '23rem',
       }}
       spacing={2}
-      onSubmit={handleSubmit}
+      onSubmit={handleSubmit(onSubmit)}
       noValidate
       autoCapitalize="none"
       autoComplete="off"
     >
       <TextField
         fullWidth
-        id="username"
-        label="Username"
+        id="email"
+        label="email"
         focused
-        value={username}
-        onChange={handleUsernameChange}
+        {...register('email')}
       />
 
       <TextField
@@ -65,13 +44,20 @@ const Login: React.FC = () => {
         id="password"
         label="Password"
         type="password"
-        value={password}
-        onChange={handlePasswordChange}
+        {...register('password')}
       />
 
       <Button type="submit" variant="contained" color="primary">
         Login
       </Button>
+
+      <div style={{ height: '3rem' }}>
+        {!!Object.keys(errors).length && (
+          <Alert severity="error">
+            {errors.email?.message || errors.password?.message}
+          </Alert>
+        )}
+      </div>
 
       <p className="text-center">Don't have an account?</p>
       <Button component={Link} to="/signup" color="inherit">
