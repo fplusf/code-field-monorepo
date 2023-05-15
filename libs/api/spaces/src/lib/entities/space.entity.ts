@@ -1,4 +1,4 @@
-/* eslint-disable @nrwl/nx/enforce-module-boundaries */
+/* eslint-disable @nx/enforce-module-boundaries */
 import { User } from '@rogor/api/auth';
 import { Folder } from '@rogor/api/folders';
 import {
@@ -12,6 +12,7 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 
+// TODO: try out abstract class for to enforce-module-boundaries
 /**
  * Space entity can be created for an existing user. It is used to group folders
  * together.
