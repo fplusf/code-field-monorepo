@@ -1,9 +1,10 @@
-import React from 'react';
-import { Switch, Route, Link, Redirect } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { Switch, Route, Link, Redirect, useHistory } from 'react-router-dom';
 import { AppBar, Toolbar, Button } from '@mui/material';
 import Login from '../components/Login';
 import Signup from '../components/Signup';
 import styled from '@emotion/styled';
+import useStore from '../helpers/store';
 
 const AuthPageContainer = styled.div`
   display: flex;
@@ -22,11 +23,12 @@ const AuthPageContent = styled.div`
 `;
 
 const AuthPage: React.FC = () => {
-  const isLoggedIn = false;
-  // useStore(authStore, (state) => state.isLoggedIn);
+  const history = useHistory();
+  const store = useStore();
+  const isLoggedIn = store.get('isLoggedIn');
 
-  if (isLoggedIn) {
-    return <Redirect to="/dashboard" />;
+  if (!isLoggedIn) {
+    history.push('/login');
   }
 
   const testContent = () => {
@@ -41,6 +43,16 @@ const AuthPage: React.FC = () => {
           </Button>
           <Button component={Link} to="/signup" color="inherit">
             Signup
+          </Button>
+          <Button
+            onClick={() => {
+              store.set('isLoggedIn', false);
+            }}
+            component={Link}
+            to="/"
+            color="inherit"
+          >
+            Logout
           </Button>
         </Toolbar>
         <h2>Dashboard</h2>

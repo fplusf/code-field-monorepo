@@ -7,12 +7,12 @@ import {
   TextField,
 } from '@mui/material';
 import React, { useState } from 'react';
-// import { useStore } from '@ngneat/elf';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import { SignInFormType, signInFormSchema } from '../models/sign-in.model';
 import { useHistory } from 'react-router-dom';
+import useStore from '../helpers/store';
 
 const Login: React.FC = () => {
   const {
@@ -25,10 +25,9 @@ const Login: React.FC = () => {
 
   const [apiError, setApiError] = useState('');
   const history = useHistory();
+  const store = useStore();
 
   const onSubmit = async (data: SignInFormType) => {
-    console.log('data', data);
-
     const url =
       import.meta.env.MODE === 'development'
         ? import.meta.env.VITE_API_URL + '/authentication/sign-in'
@@ -46,19 +45,17 @@ const Login: React.FC = () => {
       const token = await response.json();
       console.log('Login successful');
 
-      // TODO: Handle it in a better way
-      localStorage.setItem('accessToken', token.accessToken);
-      localStorage.setItem('refreshToken', token.refreshToken);
+      store.set('accessToken', token.accessToken);
+      store.set('refreshToken', token.refreshToken);
+      store.set('isLoggedIn', true);
 
       setApiError('');
-
-      // redirect to home page
-      history.push('/');
+      history.push('/dashboard');
     } else {
-      // Login failed, handle error (e.g. display error message)
       const error = await response.json();
       console.error('Login failed: ', error);
       setApiError(error.message);
+      store.set('isLoggedIn', false);
     }
   };
 

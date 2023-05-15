@@ -9,8 +9,7 @@ import {
   Box,
   CircularProgress,
 } from '@mui/material';
-// import authStore from '../store';
-// import { useStore } from '@ngneat/elf';
+
 import { Link } from 'react-router-dom';
 import { SignUpFormType, signUpformSchema } from '../models/sign-up.model';
 import { SubmitHandler, useForm } from 'react-hook-form';
@@ -30,8 +29,6 @@ const Signup: React.FC = () => {
   const history = useHistory();
 
   const onSubmit: SubmitHandler<SignUpFormType> = async (data) => {
-    console.log(data);
-
     // TODO: Remove this once we have confirmPassword & terms in BE.
     const validData = {
       username: data.username,
@@ -55,13 +52,10 @@ const Signup: React.FC = () => {
     });
 
     if (response.status === 201) {
-      // Login successful, do something here (e.g. redirect to home page)
       console.log('Login successful: ', await response.json());
       setApiError('');
-      // redirect to login page
       history.push('/login');
     } else {
-      // Login failed, handle error (e.g. display error message)
       const error = await response.json();
       console.error('Login failed: ', error);
       setApiError(error.message);
