@@ -33,7 +33,16 @@ export class AuthenticationService {
 
   async signUp({ firstName, lastName, username, email, password }: SignUpDto) {
     try {
+      const userExist = await this.usersRepository.findOne({
+        where: [{ username }, { email }],
+      });
+
+      if (userExist) {
+        throw new ConflictException('Username or email already exists');
+      }
+
       const hashedPassword = await this.hashService.hash(password);
+
       const user = this.usersRepository.create({
         firstName,
         lastName,
@@ -41,6 +50,7 @@ export class AuthenticationService {
         email,
         password: hashedPassword,
       });
+
       await this.usersRepository.save(user);
       return user;
     } catch (error) {
