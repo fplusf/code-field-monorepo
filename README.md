@@ -7,7 +7,7 @@ The user can have an account and create spaces and notes
 
 run `npm install` to install all the dependencies.
 
-> Tech stack: NX,Typeorm, Postgres, Angular, React, Docker, Docker-compose and more.
+> Tech stack: NX, Nesjs, Typeorm, Postgres, Angular, React, Docker, Docker-compose and more.
 
 ## Development server
 
