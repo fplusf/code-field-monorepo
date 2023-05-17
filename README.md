@@ -1,7 +1,13 @@
 ### Full Stack Note Taking App
-This project aims to provide a simplified version of popular note-taking applications like Notion and Craft. It demonstrates a real-world scenario of a large monorepo, showcasing the integration of various frontend and backend technologies. For now it's more about stitching different tools toghether - not a perfect UX.
+This project aims to provide a simplified version of popular note-taking applications like Notion and Craft. It demonstrates a real-world scenario of a large monorepo, showcasing the integration of various frontend and backend technologies. 
+- For now it's more about stitching different tools toghether - not a perfect UX.
+- This project has the potential to be developed into a simpler and more useful alternative to Notion and Craft, providing users with full control without a paywall.
 
-The user can have an account and create spaces and notes
+## Goals
+### Codebase
+- Implement MD based Document that could be saved on user machine or a linked remote space like (Google Drive, Dropbox etc.)
+- Having media (Audio, Vidoe, Photo) attachments to each Document
+- Implement Angular Frontend app.
 
 ## Getting Started
 
