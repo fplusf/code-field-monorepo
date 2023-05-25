@@ -28,7 +28,7 @@ Run `docker-compose up` for a dev server, it will run up the Posgress DB.
 ## Understand this workspace
 
 ###Project structure:
- ├── apps
+ ``├── apps
     │   ├── api                       <-- nestjs / node (any backend related code)
     │   └── client                    <-- angular / react / svelte (any client related code)
      libs
@@ -64,7 +64,7 @@ Run `docker-compose up` for a dev server, it will run up the Posgress DB.
             └── utils                 <-- optional grouping folder (dir), usually validation logic or shared utilities
                 ├── util1             <-- lib
                 └── util2
-
+``
 Run `nx graph` to see a diagram of the dependencies of the projects.
 
 ## Further help with NX
