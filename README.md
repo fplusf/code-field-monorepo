@@ -2,7 +2,7 @@
 This project is a space for developers looking to level up their skills and create meaningful projects that benefit both themselves and maybe even some users. You can bring your favorite project to life within this Monorepo, using any JS framework you love (all supported by NX). Simplest examples you can build your favorite apps' clone and try to deploy it to Vercel, feel free to build if you have any uniqe ideas.
 
 You'll get to experience a real-world process and workflow, working with a big codebase, gaining valuable insights and making a good project showcase for your portfolio 🚀. 
-Members of the repo can / recommended to review each others code to help and share knowledge as well as keep the code base clean.  
+Members of the repo can / recommended to review each others code to help and share knowledge as well as keep the code base clean.
 
 ## Current apps list
 - 📓 Full Stack Note Taking App
