@@ -28,42 +28,45 @@ Run `docker-compose up` for a dev server, it will run up the Posgress DB.
 ## Understand this workspace
 
 ###Project structure:
-- apps
-    - api                       <-- nestjs / node (any backend related code)
-    - client                    <-- angular / react / svelte (any client related code)
-- libs
-    - api                       <-- grouping folder (dir)
-        - core                  <-- grouping folder (dir)
-            - feature           <-- nest:lib (2)
-        - feature-1             <-- grouping folder (dir)
-            - data-access       <-- nest:lib, service + entities
-            - feature           <-- nest:lib, module + controller
-            - utils             <-- nest:lib, things like interceptors, guards, pipes, etc.
-        - feature-2             <-- grouping folder (dir)
-            - data-access       <-- nest:lib, service + entities
-            - feature           <-- nest:lib, module + controller
-            - utils             <-- nest:lib, things like interceptors, guards, pipes, etc.
-    - client                    <-- grouping folder (dir)
-        - shell                 <-- grouping folder (dir) 
-            - feature           <-- angular:lib (3)
-        - feature-1             <-- grouping folder (dir)
-            - data-access       <-- angular:lib, service, API calls, state management
-            - feature           <-- grouping folder (dir) or lib (4)
-                - list          <-- angular:lib e.g. ProductList
-                - detail        <-- angular:lib e.g. ProductDetail
-            - ui                <-- grouping folder (dir)
-                - comp-1        <-- angular:lib, SCAM for Component
-                - pipe-1        <-- angular:lib, SCAM for Pipe
-        - shared                <-- grouping folder (dir)
-            - data-access       <-- angular:lib, any Service or State management to share across the Client app
-            - ui                <-- grouping folder (dir) (5)
-            - utils             <-- angular:lib, usually shared Guards, Interceptors, Validators, etc.
-- shared                        <-- grouping folder (dir), most libs in here are buildable @nrwl/angular:lib
-    - data-access               <-- my shared data-access is usually models, so it is a lib
-    - ui                        <-- optional grouping folder (dir), if I have multiple client apps
-    - utils                     <-- optional grouping folder (dir), usually validation logic or shared utilities
-        - util1                 <-- lib
-        - util2
+<pre>
+└── root
+    ├── apps
+    │   ├── api                   &lt;-- nest/node/denojs
+    │   └── client                &lt;-- angular/react
+└── libs (1)
+    ├── api                       &lt;-- grouping folder (dir)
+    │   ├── core                  &lt;-- grouping folder (dir)
+    │   │   └── feature           &lt;-- nest/node/deno:lib (2)
+    │   ├── feature-1             &lt;-- grouping folder (dir)
+    │   │   ├── data-access       &lt;-- nest/node/deno:lib, service + entities
+    │   │   ├── feature           &lt;-- nest/node/deno:lib, module + controller
+    │   │   └── utils             &lt;-- nest/node/deno:lib, things like interceptors, guards, pipes etc...
+    │   └── feature-2             &lt;-- grouping folder (dir)
+    │       ├── data-access       &lt;-- nest/node/deno:lib, service + entities
+    │       ├── feature           &lt;-- nest/node/deno:lib, module + controller
+    │       └── utils             &lt;-- nest/node/deno:lib, things like interceptors, guards, pipes etc...
+    ├── client                    &lt;-- grouping folder (dir)
+    │   ├── shell                 &lt;-- grouping folder (dir) 
+    │   │   └── feature           &lt;-- angular/react:lib (3)
+    │   ├── feature-1             &lt;-- grouping folder (dir)
+    │   │   ├── data-access       &lt;-- angular/react:lib, service, API calls, state management)
+    │   │   ├── feature           &lt;-- grouping folder (dir) or lib (4)
+    │   │   │   ├── list          &lt;-- angular/react:lib e.g. ProductList
+    │   │   │   └── detail        &lt;-- angular/react:lib e.g. ProductDetail
+    │   │   └── ui                &lt;-- grouping folder (dir)
+    │   │       ├── comp-1        &lt;-- angular/react:lib, SCAM for Component
+    │   │       └── pipe-1        &lt;-- angular/react:lib, SCAM for Pipe
+    │   └── shared                &lt;-- grouping folder (dir)
+    │       ├── data-access       &lt;-- angular/react:lib, any Service or State management to share across the Client app)
+    │       ├── ui                &lt;-- grouping folder (dir) (5)
+    │       └── utils             &lt;-- angular/react:lib, usually shared Guards, Interceptors, Validators...)
+    └── shared                    &lt;-- grouping folder (dir), most libs in here are buildable @nrwl/angular:lib)
+        ├── data-access           &lt;-- my shared data-access is usually models, so it is a lib
+        ├── ui                    &lt;-- optional grouping folder (dir), if I have multiple client apps
+        └── utils                 &lt;-- optional grouping folder (dir), usually validation logic or shared utilities
+            ├── util1             &lt;-- lib
+            └── util2             &lt;-- lib
+</pre>
 
 Run `nx graph` to see a diagram of the dependencies of the projects.
 
