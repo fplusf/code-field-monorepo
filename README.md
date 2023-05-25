@@ -1,16 +1,19 @@
-### Full Stack Note Taking App
-This project aims to provide a simplified version of popular note-taking applications like Notion and Craft. It demonstrates a real-world scenario of a large monorepo, showcasing the integration of various frontend and backend technologies. 
-- For now it's more about stitching different tools toghether - not a perfect UX.
-- This project has the potential to be developed into a simpler and more useful alternative to Notion and Craft, providing users with full control without a paywall.
+## Motivation
+This project is a space for developers looking to level up their skills and create meaningful projects that benefit both themselves and maybe even some users. You can bring your favorite project to life within this Monorepo, using any JS framework you love (all supported by NX). Simplest examples you can build your favorite apps' clone and try to deploy it to Vercel, feel free to build if you have any uniqe ideas.
 
-## Goals
-### Codebase
+You'll get to experience a real-world process and workflow, working with a big codebase, gaining valuable insights and making a good project showcase for your portfolio 🚀. 
+Members of the repo can / recommended to review each others code to help and share knowledge as well as keep the code base clean.  
+
+## Current apps list
+- 📓 Full Stack Note Taking App
+This project aims to provide a simplified version of popular note-taking applications like Notion and Craft.
+
+## Some Todos
+- Implement Angular Frontend app for Rogo-Notes app, the Backend is alredy built with Nestjs.
 - Implement MD based Document that could be saved on user machine or a linked remote space like (Google Drive, Dropbox etc.)
 - Having media (Audio, Vidoe, Photo) attachments to each Document
-- Implement Angular Frontend app.
 
 ## Getting Started
-
 run `npm install` to install all the dependencies.
 
 > Tech stack: NX, Nesjs, Typeorm, Postgres, Angular, React, Docker, Docker-compose and more.
